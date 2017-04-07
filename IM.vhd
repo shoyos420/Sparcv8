@@ -37,7 +37,7 @@ begin
 			if(reset = '1')then
 				outInstruction <= (others=>'0');
 			else
-				outInstruction <= instructions(conv_integer(address(5 downto 0)));
+				outInstruction <= instructions(conv_integer(address(5 downto 0)) );
 			end if;
 		
 	end process;

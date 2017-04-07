@@ -18,7 +18,7 @@ entity RF is
 			--contentRegisterDestination : out  STD_LOGIC_VECTOR (31 downto 0)
 end RF;
 
-architecture Behavorial of RF is
+architecture arqRF of RF is
 
 	type ram_type is array (0 to 39) of std_logic_vector (31 downto 0);
 	signal registers : ram_type :=(others => x"00000000");
@@ -38,9 +38,11 @@ begin
 				contentRegisterSource2 <= registers(conv_integer(registerSource2));
 				--contentRegisterDestination <= registers(conv_integer(registerDestination));
 				--if(writeEnable = '1' and registerDestination /= "000000")then
-				registers(conv_integer(registerDestination)) <= dataToWrite;
+				if(registerDestination /= "000000")then
+					registers(conv_integer(registerDestination)) <= dataToWrite;
+				end if;
 				
-			end if;
+			end if; 
 		--end if;
 	end process;
-end Behavorial;
+end arqRF;
