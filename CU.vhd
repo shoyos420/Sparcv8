@@ -54,4 +54,4 @@ begin
 					end if;
 	
 	end process;
-end arqControl;
+end Behavorial;
