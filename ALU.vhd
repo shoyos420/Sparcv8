@@ -1,3 +1,7 @@
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+
+
 entity ALU is
     Port ( operando1 : in  STD_LOGIC_VECTOR (31 downto 0);
            operando2 : in  STD_LOGIC_VECTOR (31 downto 0);
