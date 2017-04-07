@@ -8,14 +8,14 @@ use IEEE.STD_LOGIC_UNSIGNED.ALL;
 entity RF is
     Port ( --clkFPGA : in  STD_LOGIC;
            reset : in  STD_LOGIC;
-           registerSource1 : in  STD_LOGIC_VECTOR (5 downto 0);
-           registerSource2 : in  STD_LOGIC_VECTOR (5 downto 0);
-           registerDestination : in  STD_LOGIC_VECTOR (5 downto 0);
-           writeEnable : in  STD_LOGIC;
+           registerSource1 : in  STD_LOGIC_VECTOR (4 downto 0);
+           registerSource2 : in  STD_LOGIC_VECTOR (4 downto 0);
+           registerDestination : in  STD_LOGIC_VECTOR (4 downto 0);
+           --writeEnable : in  STD_LOGIC;
 			  dataToWrite : in STD_LOGIC_VECTOR (31 downto 0);
            contentRegisterSource1 : out  STD_LOGIC_VECTOR (31 downto 0);
-           contentRegisterSource2 : out  STD_LOGIC_VECTOR (31 downto 0);
-           contentRegisterDestination : out  STD_LOGIC_VECTOR (31 downto 0));
+           contentRegisterSource2 : out  STD_LOGIC_VECTOR (31 downto 0));
+			--contentRegisterDestination : out  STD_LOGIC_VECTOR (31 downto 0)
 end RF;
 
 architecture Behavorial of RF is
@@ -25,21 +25,21 @@ architecture Behavorial of RF is
 
 begin
 --,reset,registerSource1,registerSource2,registerDestination,writeEnable,dataToWrite
-	process(reset,registerSource1,registerSource2,registerDestination,writeEnable,dataToWrite)--clkFPGA)
+	process(reset,registerSource1,registerSource2,dataToWrite)--clkFPGA)
 	begin
 		--if(rising_edge(clkFPGA))then
 			if(reset = '1')then
 				contentRegisterSource1 <= (others=>'0');
 				contentRegisterSource2 <= (others=>'0');
-				contentRegisterDestination <= (others=>'0');
+				--contentRegisterDestination <= (others=>'0');
 				registers <= (others => x"00000000");
 			else
 				contentRegisterSource1 <= registers(conv_integer(registerSource1));
 				contentRegisterSource2 <= registers(conv_integer(registerSource2));
-				contentRegisterDestination <= registers(conv_integer(registerDestination));
-				if(writeEnable = '1' and registerDestination /= "000000")then
-					registers(conv_integer(registerDestination)) <= dataToWrite;
-				end if;
+				--contentRegisterDestination <= registers(conv_integer(registerDestination));
+				--if(writeEnable = '1' and registerDestination /= "000000")then
+				registers(conv_integer(registerDestination)) <= dataToWrite;
+				
 			end if;
 		--end if;
 	end process;

@@ -32,4 +32,4 @@ begin
 		--end if;
 	end process;
 
-end Behavorialt;
+end Behavorial;
